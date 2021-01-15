@@ -1,4 +1,5 @@
 ## Self Driving Car (Longitude & Lateral Controllers for Waypoint tracking of a vehicle)
+![](images/car.png)
 
 ### Dependencies
 #### (Important!)
@@ -34,31 +35,26 @@ For the class we use global variables for proportional controller, derivative ga
 1. >**_PID_()**: performs longitudinal control of the vehicle by trying to minimize the error between actual velocity & desired velocity from acquired simulation data. This error is used in computing the throttle needed to catch up with desired values. 
 **Throttle = Kp(error) + Kd(error)/dt + Ki(error)dt**
 where dt is 0.1sec.
+   
+![](images/control.JPG)
+![](images/table.JPG)
+![](images/pid_equation.JPG)
+
 2. >**pure_pursuit()**: performs the latitudinal control of the vehicle by calculating steering angle needed to turn towards the desired target waypoint. The steering angle (delta) is calculated as 
 **delta = math.atan2((2.0WBxSIN(alpha)), Ld)**
 where **alpha** is the angle between the car's rear axle and target waypoint subtracted by car's yaw, **Ld** is the dynamic look ahead distance from TargetCourse(), and **WB** is the length of the rear axle of a car.
 
+![](images/geometry.JPG)
+![](images/pure_pursuit_equations.JPG)
+
 ###### Notes: 
 Proportional, Derivative and Integral gain values can be further tuned. As of now they are set to **_Kp=0.5, Kd=0.1, Ki=0.15_**.
 
-#### 2. _test.py_
-##### Description
-plots.py file consists of multiple plotting methods to offer insight into controller performance.
-
-##### Classes
-
-###### plots():
-The key methods of the classes are.
-
-1. >**speed_profile()**:   sets up plot for speed vs time
-2. >**tracking_error()**:  sets up plot for tracking error magnitude i.e. sums of square root of lateral and longitudinal controller errors vs time
-3. >**look_distance()**:  sets up time plot for look ahead distance dynamically scaled using vehicle velocity
-4. >**throttle()**:  sets up plot for PID controller throttle values vs time
-5. >**steering()**:  sets up plot for Pure Pursuit controller steering values vs time
-
-#### 3. _main.py_
+#### 2. _main.py_
 ##### Description
 main.py file contains the main body of code with imports from Test.py and controller.py. Here the acquired waypoints (x,y coords and velocity) are read from a text file and stored as an array. In a while loop, the target waypoint index is calculated using TargetCourse() class, and the waypoint at this index acts as reference targets for the PID and Pure Pursuit controller which output steering and throttle values. The controller outpur is then used to update and store the state variables for the vehicle over time, after which, live plotting is performed. We generate additional plots for better insights of simulation using Test.py() class for tracking error, steering angle, throttle and velocity plots.  
+
+![](images/trajectory.png)
 
 ##### Classes
 
@@ -77,6 +73,23 @@ TargetCourse class outputs the index of the target waypoint along the course tra
 ###### Notes: 
 Change the file name for reading and simulating different waypoints data text file. 
 _line_list = [line.rstrip('\n') for line in open('**waypoint_carla.txt**')]_
+
+#### 3. _test.py_
+##### Description
+plots.py file consists of multiple plotting methods to offer insight into controller performance.
+
+##### Classes
+
+###### plots():
+The key methods of the classes are.
+
+1. >**speed_profile()**:   sets up plot for speed vs time
+2. >**tracking_error()**:  sets up plot for tracking error magnitude i.e. sums of square root of lateral and longitudinal controller errors vs time
+3. >**look_distance()**:  sets up time plot for look ahead distance dynamically scaled using vehicle velocity
+4. >**throttle()**:  sets up plot for PID controller throttle values vs time
+5. >**steering()**:  sets up plot for Pure Pursuit controller steering values vs time
+
+![](images/test_results.JPG)
 
 #### 4._waypoint_generator.py_
 
