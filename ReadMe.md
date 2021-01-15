@@ -36,9 +36,9 @@ For the class we use global variables for proportional controller, derivative ga
 **Throttle = Kp(error) + Kd(error)/dt + Ki(error)dt**
 where dt is 0.1sec.
    
-![](images/control.JPG)
-![](images/table.JPG)
-![](images/pid_equation.JPG)
+![](images/control.jpg)
+![](images/table.jpg)
+![](images/pid_equation.jpg)
 
 2. >**pure_pursuit()**: performs the latitudinal control of the vehicle by calculating steering angle needed to turn towards the desired target waypoint. The steering angle (delta) is calculated as 
 **delta = math.atan2((2.0WBxSIN(alpha)), Ld)**
