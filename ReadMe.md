@@ -44,7 +44,7 @@ where dt is 0.1sec.
 **delta = math.atan2((2.0WBxSIN(alpha)), Ld)**
 where **alpha** is the angle between the car's rear axle and target waypoint subtracted by car's yaw, **Ld** is the dynamic look ahead distance from TargetCourse(), and **WB** is the length of the rear axle of a car.
 
-![](images/geometry.JPG)
+![](images/geometry.jpg)
 ![](images/pure_pursuit_equations.JPG)
 
 ###### Notes: 
